@@ -1,0 +1,275 @@
+﻿@page "/favourites"
+@inject HttpClient Http
+@using Blazored.LocalStorage
+@inject Services.WeatherService WeatherService
+@inject NavigationManager Navigation
+@inject Services.LoginService LoginService
+@inject Services.LocationService LocationService
+@inject Services.FavoriteServices FavoriteService
+@inject ILocalStorageService LocalStorage
+@inject ISnackbar Snackbar
+@using System.Text.Json.Serialization
+@using System.Text.Json
+@using System.Text
+@using MyWeatherApp.DataFormats
+
+<PageTitle>Favourites | CloudCasts</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="profile-container" Style="margin-top: 20px; background-color: #f4f6f8; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    @if (isLoading)
+    {
+        <div style="display:flex; justify-content:center; align-items:center; height:70vh;">
+            <MyWeatherApp.Components.Loader />
+        </div>
+    }
+    else
+    {
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%; gap: 20px;">
+                <div class="form-group" style="flex-grow: 1; padding-top:5px;">
+                    <select id="countrySelect" class="form-control" @onchange="OnCountryChange" style="height: 55px; font-size: 14px; background-color:white;">
+                        <option value="" style="color:floralwhite;">Select Country</option>
+                        @foreach (var country in countries)
+                        {
+                            <option value="@country.Name">@country.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <MudAutocomplete T="string" Label="Cities" @bind-Value="cityValue" SearchFunc="@Search1" Variant="Variant.Outlined" ShowProgressIndicator="true" Style="background-color:white;" />
+
+                <button @onclick="SaveFavouriteCities" style="height: 40px; font-size: 14px; flex-shrink: 0; background-color: cadetblue; color:white; padding: 0 20px;">
+                    Add to Favourites
+                </button>
+            </div>
+
+            @if (favouriteCities != null && favouriteCities.Any())
+            {
+                <div style="margin-top:30px; width:100%;">
+                    <MudCard Style="background-color:tomato; color:white;">
+                        <MudCardContent Style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+                            <MudText Typo="Typo.h5"><div>Favourite Cities</div></MudText>
+                            @if (!string.IsNullOrEmpty(FavUpdatedAt))
+                            {
+                                var updatedAt = DateTime.Parse(FavUpdatedAt);
+                                <MudText Typo="Typo.body2" Style="background-color:white; padding:8px; color:black; border:0.5px solid black"><div>Last Updated: <span style="color: tomato; font-weight:bold;"> @updatedAt.ToString("dd MMM yyyy")</span><span style="color:black; padding-left: 10px;">@updatedAt.ToString("HH:mm:ss")</span></div></MudText>
+                            }
+                        </MudCardContent>
+                    </MudCard>
+
+
+                    <MudTable Items="favouriteCities" Hover="true" FixedHeader="true" Bordered="true" Striped="true" Height="400px" Style="max-height: 400px; overflow-y: auto; scroll-behavior:smooth;">
+                        <HeaderContent>
+                            <MudTh>City</MudTh>
+                            <MudTh>Country</MudTh>
+                            <MudTh>Population</MudTh>
+                            <MudTh>Latitude</MudTh>
+                            <MudTh>Longitude</MudTh>
+                            <MudTh>Timezone</MudTh>
+                            <MudTh>Actions</MudTh>
+                        </HeaderContent>
+
+                        <RowTemplate>
+                            <MudTd DataLabel="City">@context.Name</MudTd>
+                            <MudTd DataLabel="Country">@context.Country</MudTd>
+                            <MudTd DataLabel="Population">@context.Population</MudTd>
+                            <MudTd DataLabel="Latitude">@context.Coord.Lat</MudTd>
+                            <MudTd DataLabel="Longitude">@context.Coord.Lon</MudTd>
+                            <MudTd DataLabel="Timezone">@context.Timezone</MudTd>
+                            <MudTd DataLabel="Actions">
+                                <MudButton Color="Color.Error" @onclick="() => RemoveCity(context.Name)">
+                                    @if (isRemoving.ContainsKey(context.Name) && isRemoving[context.Name])
+                                    {
+                                        <span>Loading...</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Remove</span>
+                                    }
+                                </MudButton>
+                            </MudTd>
+                        </RowTemplate>
+                    </MudTable>
+
+                </div>
+            }
+            else
+            {
+                <div>No favorite cities added yet.</div>
+            }
+        </div>
+    }
+</MudContainer>
+
+@code {
+    private bool isLoggedIn = false;
+    private List<DataFormats.LocationDetails.CountryDetails> countries = new List<DataFormats.LocationDetails.CountryDetails>();
+    public DataFormats.WeatherResponse? weatherRes;
+    private List<string>? cities = new List<string>();
+    private bool isLoading = false;
+    private List<DataFormats.ApiResponses.City> favouriteCities { get; set; } = new List<DataFormats.ApiResponses.City>();
+    private string FavUpdatedAt = "";
+    private bool isSaveButtonDisabled = true;
+    private string cityValue = "";
+    private Dictionary<string, bool> isRemoving = new Dictionary<string, bool>();
+    private string userId { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        StateHasChanged();
+        DataFormats.ApiResponses.SessionResponse? res = await LoginService.IsLoggedInAsync();
+        if (res != null)
+        {
+            isLoggedIn = true;
+            userId = res.User.Id;
+            StateHasChanged();
+        }
+        else
+        {
+            isLoggedIn = false;
+            StateHasChanged();
+        }
+
+        if (isLoggedIn)
+        {
+            await FetchFavouriteCities();
+            var countryResponse = await Http.GetFromJsonAsync<DataFormats.LocationDetails.CountryApiResponse>("https://countriesnow.space/api/v0.1/countries/info?returns=currency,flag,unicodeFlag,dialCode");
+            if (countryResponse != null && countryResponse.Data != null)
+            {
+                countries = countryResponse.Data;
+            }
+        }
+        else
+        {
+            Snackbar.Add("Please Login", Severity.Warning);
+            Navigation.NavigateTo("/login");
+        }
+        isLoading = false;
+        StateHasChanged();
+    }
+
+    private async Task OnCountryChange(ChangeEventArgs e)
+    {
+        var selectedCountry = e.Value.ToString();
+        if (!string.IsNullOrEmpty(selectedCountry))
+        {
+            cities = await LocationService.GetAllCountries(selectedCountry);
+            isSaveButtonDisabled = cities?.Count == 0 || string.IsNullOrEmpty(cityValue);
+        }
+    }
+
+    private async Task SaveFavouriteCities()
+    {
+        if (string.IsNullOrEmpty(cityValue))
+        {
+            Snackbar.Add("Please select a city.", Severity.Warning);
+            return;
+        }
+        try
+        {
+            isLoading = true;
+            StateHasChanged();
+            weatherRes = await WeatherService.GetWeatherAsync(cityValue);
+            var res = await FavoriteService.SaveCity(userId, weatherRes.City);
+            if (res != null)
+            {
+                Snackbar.Add("City added to favourites successfully.", Severity.Success);
+                await FetchFavouriteCities();
+            }
+            else
+            {
+                Snackbar.Add("Failed to add city to favourites.", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task FetchFavouriteCities()
+    {
+        try
+        {
+            isLoading = true;
+            StateHasChanged();
+            if (string.IsNullOrEmpty(userId))
+            {
+                Snackbar.Add("User not logged in.", Severity.Error);
+                return;
+            }
+
+            var response = await FavoriteService.FetchFavoriteCities(userId);
+            if (response != null)
+            {
+                favouriteCities = response.FavCities;
+                FavUpdatedAt = response.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            else
+            {
+                Snackbar.Add("No favourite cities found.", Severity.Warning);
+                return;
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("No Data Found.", Severity.Error);
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async void RemoveCity(string city)
+    {
+        try
+        {
+            isRemoving[city] = true;
+            StateHasChanged();
+            var userId = await LocalStorage.GetItemAsync<string>("userId");
+            if (string.IsNullOrEmpty(userId))
+            {
+                Snackbar.Add("User not logged in.", Severity.Error);
+                return;
+            }
+
+            var response = await FavoriteService.RemoveCity(userId, city);
+            if (response != null)
+            {
+                Snackbar.Add("City removed from favourites.", Severity.Success);
+                await FetchFavouriteCities();
+            }
+            else
+            {
+                Snackbar.Add("Failed to remove city from favourites.", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isRemoving[city] = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task<IEnumerable<string>> Search1(string value, CancellationToken token)
+    {
+        await Task.Delay(500, token);
+
+        if (string.IsNullOrEmpty(value))
+            return cities;
+
+        return cities.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+}

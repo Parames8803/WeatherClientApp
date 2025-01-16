@@ -1,0 +1,188 @@
+﻿@page "/forcast"
+@inject Services.WeatherService WeatherService
+@inject ISnackbar Snackbar
+
+<PageTitle>Weather Forecasts | CloudCasts</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="profile-container" Style="margin-top: 20px; background-color: #f4f6f8; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <div style="display:flex; align-items:center;">
+        <MudTextField @bind-Value="City" Label="City Name" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.LocationCity" Style="width:400px; height:50px; background-color:white;"></MudTextField>
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="FetchWeather">Get Forcasts</MudButton>
+    </div>
+
+    @if (IsLoading)
+    {
+        <div style="display:flex; justify-content:center; align-items:center; height:50vh;"><MyWeatherApp.Components.Loader /></div>
+    }
+    else if (WeatherData != null)
+    {
+        <div class="text-center mb-4">
+            @if (WeatherData != null && WeatherData.List.Any())
+            {
+                var city = WeatherData.City.Name;
+                var todayForecast = WeatherData.List.First();
+                <h4><MudIcon Icon="mdi-weather-partly-cloudy" Size="Size.Large" />Weather in @city</h4>
+                <div class="d-flex justify-content-center gap-4">
+                    <div>
+                        <h5>Temperature</h5>
+                        <p>@Math.Round(todayForecast.Main.Temp - 273.15) °C / @Math.Round(((todayForecast.Main.Temp - 273.15) * 9 / 5 + 32)) °F</p>
+                    </div>
+                    <div>
+                        <h5>Humidity</h5>
+                        <p>@todayForecast.Main.Humidity %</p>
+                    </div>
+                    <div>
+                        <h5>Wind</h5>
+                        <p>@Math.Round(todayForecast.Wind.Speed) m/s</p>
+                    </div>
+                    <div>
+                        <h5>Cloud Coverage</h5>
+                        <p>@todayForecast.Clouds.All %</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>No weather data available for today.</p>
+            }
+        </div>
+
+        <div>
+            @if (WeatherData != null && WeatherData.List.Any())
+            {
+                var todayForecasts = WeatherData.List.Where(f => f.Dt_txt.StartsWith(DateTime.Now.ToString("yyyy-MM-dd"))).ToList();
+                <div style="display:flex; justify-content:center; align-items:center; width:100%;">
+                    <MudCardContent style="display:flex; justify-content:center; align-items:center; width:fit-content;">
+                        <MudTabs>
+                            <MudTabPanel Text="Temperature">
+                                <MudChart ChartType="ChartType.Line" ChartSeries="@TemperatureSeries" XAxisLabels="@XAxisLabels" Width="100%" Height="300px" ChartOptions="@Options" />
+                            </MudTabPanel>
+                            <MudTabPanel Text="Humidity">
+                                <MudChart ChartType="ChartType.Line" ChartSeries="@HumiditySeries" XAxisLabels="@XAxisLabels" Width="100%" Height="300px" ChartOptions="@Options" />
+                            </MudTabPanel>
+                            <MudTabPanel Text="Wind Speed">
+                                <MudChart ChartType="ChartType.Pie" InputData="@WindSpeedSeries" InputLabels="@XAxisLabels" Width="100%" Height="300px" ChartOptions="@Options" />
+                            </MudTabPanel>
+                        </MudTabs>
+                    </MudCardContent>
+                </div>
+            }
+        </div>
+
+        <div class="mt-4">
+            @if (WeatherData != null && WeatherData.List.Any())
+            {
+                var weeklyForecasts = WeatherData.List
+                .GroupBy(f => DateTime.Parse(f.Dt_txt).Date)
+                .Select(g => g.First())
+                .Take(7)
+                .ToList();
+
+                <MudGrid>
+                    @foreach (var dayForecast in weeklyForecasts)
+                    {
+                        <MudItem xs="12" sm="6" md="4" lg="3">
+                            <MudCard Style="text-align: center;">
+                                <MudCardContent>
+                                    <img src="clouds.png" alt="Cloudy" style="width:50px; height:50px;" />
+                                    <h6>@DateTime.Parse(dayForecast.Dt_txt).ToString("dddd")</h6>
+                                    <p>@DateTime.Parse(dayForecast.Dt_txt).ToString("d MMM yyyy")</p>
+                                    <p>@Math.Round(dayForecast.Main.Temp - 273.15) °C</p>
+                                    <p>Wind: @Math.Round(dayForecast.Wind.Speed) m/s</p>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudItem>
+                    }
+                </MudGrid>
+            }
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <p style="color:red;">Error: @ErrorMessage</p>
+    }
+
+</MudContainer>
+
+
+@code {
+    public string City = "";
+    public DataFormats.WeatherResponse? WeatherData;
+    public bool IsLoading = false;
+    public string ErrorMessage = "";
+    public bool WeatherDataAvailable => WeatherData != null;
+
+    public List<ChartSeries> TemperatureSeries { get; set; } = new();
+    public double[] WindSpeedSeries { get; set; } = { };
+    public List<ChartSeries> HumiditySeries { get; set; } = new();
+    public string[] XAxisLabels { get; set; } = Array.Empty<string>();
+    public ChartOptions Options = new ChartOptions();
+
+    private void InitializeChartData()
+    {
+        IsLoading = true;
+        if (WeatherData?.List == null) return;
+
+        var todayForecasts = WeatherData.List
+            .Where(f => f.Dt_txt.StartsWith(DateTime.Now.ToString("yyyy-MM-dd")))
+            .ToList();
+
+        TemperatureSeries = new List<ChartSeries>
+        {
+            new ChartSeries
+        {
+            Name = "Temperature (Min) (°C)",
+            Data = todayForecasts.Select(f => Math.Round(f.Main.Temp_min - 273.15)).ToArray()
+        },
+        new ChartSeries
+        {
+            Name = "Temperature (Max) (°C)",
+            Data = todayForecasts.Select(f => Math.Round(f.Main.Temp_max - 273.15)).ToArray()
+        }
+        };
+
+        WindSpeedSeries = todayForecasts.Select(f => (double)f.Wind.Speed).ToArray();
+
+        HumiditySeries = new List<ChartSeries>
+        {
+        new ChartSeries
+        {
+            Name = "Humidity (Min) (%)",
+            Data = todayForecasts.Select(f => (double)f.Main.Humidity).ToArray()
+        },
+        };
+
+        // Options.InterpolationOption = InterpolationOption.NaturalSpline;
+        XAxisLabels = todayForecasts.Select(f => DateTime.Parse(f.Dt_txt).ToString("h tt")).ToArray();
+        IsLoading = false;
+    }
+
+    public async Task FetchWeather()
+    {
+        WeatherData = null;
+        if (string.IsNullOrWhiteSpace(City))
+        {
+            Snackbar.Add("Please enter a city name.", Severity.Error);
+            return;
+        }
+
+        IsLoading = true;
+        ErrorMessage = "";
+        WeatherData = null;
+
+        try
+        {
+            WeatherData = await WeatherService.GetWeatherAsync(City);
+            InitializeChartData();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            Snackbar.Add("City Name Not Found", Severity.Info);   
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+}

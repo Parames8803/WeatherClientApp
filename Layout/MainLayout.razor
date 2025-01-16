@@ -1,0 +1,84 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+@inject Services.LoginService LoginService
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Color="Color.Dark">
+        <div>
+            <MudTooltip Text="@(_drawerOpen ? "Close Menu" : "Open Menu")">
+                <MudIconButton Icon="@(_drawerOpen ? Icons.Material.Filled.Close : Icons.Material.Filled.Menu)"
+                Color="Color.Inherit"
+                OnClick="@ToggleDrawer" />
+            </MudTooltip>
+        </div>
+        <MudSpacer />
+        <div style="text-align: center; display:flex; align-items:center;">
+            <h5 class="m-0">CloudCasts</h5>
+        </div>
+        <MudSpacer />
+        <div style="text-align:center; display:flex; align-items:center;">
+            @if (!isLoggedIn)
+            {
+                <MudTooltip Text="Login">
+                    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Login" OnClick="@RouteToAuthPage" Color="Color.Secondary" Size="Size.Small">Login</MudButton>
+                </MudTooltip>
+            }
+            else
+            {
+                <MudTooltip Text="Logout">
+                    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Logout" OnClick="@HandleLogout" Color="Color.Primary" Size="Size.Small">Logout</MudButton>
+                </MudTooltip>
+            }
+        </div>
+    </MudAppBar>
+
+    <MudDrawer @bind-Open="_drawerOpen" Variant="DrawerVariant.Responsive">
+        <MudDrawerHeader Style="display:flex; justify-content:center; align-items:center; width:100%; background-color:slategrey;">
+            <MudText Style="display:flex; justify-content:center; align-items:center; width:100%; color:white;">Menu</MudText>
+        </MudDrawerHeader>
+        <NavMenu />
+    </MudDrawer>
+
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Medium">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    private bool _drawerOpen = false;
+    public bool isLoggedIn = false;
+    protected override async Task OnInitializedAsync()
+    {
+        DataFormats.ApiResponses.SessionResponse? res = await LoginService.IsLoggedInAsync();
+        if(res != null){
+            isLoggedIn = true;
+            StateHasChanged();
+        }else{
+            isLoggedIn = false;
+            StateHasChanged();
+        }
+    }
+
+    private void ToggleDrawer()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    private void RouteToAuthPage()
+    {
+        Navigation.NavigateTo("/login");
+    }
+
+    private async void HandleLogout()
+    {
+        await LoginService.LogoutAsync();
+        Navigation.NavigateTo("/login");
+    }
+}

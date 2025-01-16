@@ -1,0 +1,282 @@
+﻿@page "/profile"
+@inject NavigationManager Navigation
+@using Blazored.LocalStorage
+@inject ILocalStorageService LocalStorage
+@inject Services.LoginService LoginService
+@inject Services.FavoriteServices FavoriteService
+@inject Services.LocationService LocationService
+@inject ISnackbar Snackbar
+@using MudBlazor
+@inject HttpClient Http
+@inject IConfiguration configuration
+@using System.Text.Json.Serialization
+@using System.Text.Json
+@using System.Text
+
+<PageTitle>Profile | CloudCasts</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large" Style="padding: 40px 20px;">
+    @if (isLoading)
+    {
+        <div style="display: flex; justify-content: center; align-items: center; height: 60vh;">
+            <MyWeatherApp.Components.Loader />
+        </div>
+    }
+    else
+    {
+        <MudCard Style="border-radius: 12px; background-color: #fff; padding: 20px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); width: 100%; display: flex; align-items: center;">
+            <MudCardContent Style="display: flex; flex-direction: row; justify-content: flex-start; width: 100%; gap: 30px;">
+                <div style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(45deg, #ff6b6b, #f06595); color: white; display: flex; justify-content: center; align-items: center; font-size: 2rem; font-weight: bold;">
+                    <MudText Typo="Typo.h4" Style="color: white;">
+                        @($"{char.ToUpper(userEmail[0])}")
+                    </MudText>
+                </div>
+
+                <div style="flex: 1;">
+                    <MudText Typo="Typo.h5" Style="color: tomato; text-align: left;">
+                        <span style="color: black;">Welcome, </span>@($"{userEmail}!")
+                    </MudText>
+
+                    <div style="display:flex; align-items:center; justify-content: flex-start; gap:10px;">
+                        <MudTooltip Text="Location">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+                                <MudIcon Icon="@Icons.Material.Filled.LocationOn" Style="color: #f06595;"></MudIcon>
+                                <MudText Typo="Typo.body1" Style="color: #555;">
+                                    <span style="color: #555; padding-left: 5px;">@location?.City, @location?.Country</span>
+                                </MudText>
+                            </div>
+                        </MudTooltip>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+                            <MudTooltip Text="Current Time">
+                                <div style="display:flex; align-items:center;">
+                                    <MudIcon Icon="@Icons.Material.Filled.AccessTimeFilled" Style="color: #f06595;"></MudIcon>
+                                    <MudText Typo="Typo.body1" Style="color: #555;">
+                                        <span style="color: #555; padding-left: 5px;">@currentTime</span>
+                                    </MudText>
+                                </div>
+
+                            </MudTooltip>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+                            <MudTooltip Text="Followers Count">
+                                <div style="display:flex; align-items:center;">
+                                    <MudIcon Icon="@Icons.Material.Filled.People" Style="color: #f06595;" />
+                                    <MudText Typo="Typo.body1" Style="color: #555;">
+                                        <span style="color: #555; padding-left:5px;">1,254</span>
+                                    </MudText>
+                                </div>
+
+                            </MudTooltip>
+
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+                            <MudTooltip Text="Following Count">
+                                <div style="display:flex; align-items:center;">
+                                    <MudIcon Icon="@Icons.Material.Filled.PersonAdd" Style="color: #f06595;" />
+                                    <MudText Typo="Typo.body1" Style="color: #555;">
+                                        <span style="color: #555; padding-left:5px;">305</span>
+                                    </MudText>
+                                </div>
+
+                            </MudTooltip>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 10px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <MudText Typo="Typo.h6" Style="margin: 0 0 10px; font-weight: bold; color: #333;">
+                            <h6>About Me</h6>
+                        </MudText>
+                        <MudText Typo="Typo.body2" Style="color: #777; line-height: 1.5;">
+                            <span>Passionate about technology, coding, and building amazing applications. Always eager to learn new things and solve challenging problems.</span>
+                        </MudText>
+                    </div>
+                </div>
+            </MudCardContent>
+        </MudCard>
+
+
+
+        <MudCard Style="margin-top: 30px; border-radius: 12px; background-color: #fff; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <MudCardContent>
+                <MudText Typo="Typo.h5" Style="font-weight: bold; color: #3f51b5; margin-bottom: 15px;">
+                    <h5>Your Favourite Cities & its Weather</h5>
+                </MudText>
+
+                @if (favouriteCitiesWeatherDetails.Any())
+                {
+                    <MudList T="string" Style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
+                        @foreach (var cityWeather in favouriteCitiesWeatherDetails.Select((value, index) => new { value, index }))
+                        {
+                            <MudListItem @onclick="() => ShowWeatherDetails(cityWeather.value, cityWeather.index)"
+                                         Style="flex: 1 1 calc(33% - 15px); margin-bottom: 15px;
+                            border: 0.5px solid gray; text-align: center;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                            transition: box-shadow 0.3s ease;">
+                                <MudText Typo="Typo.h6" Style="cursor: pointer;">
+                                    <h6>@favouriteCities[cityWeather.index].Name</h6>
+                                </MudText>
+                            </MudListItem>
+                        }
+                    </MudList>
+
+
+
+                    @if (selectedCityWeather != null)
+                    {
+                        <MudCard Style="margin-top: 20px; background-color: #f4f4f4; padding: 15px;">
+                            <MudCardContent>
+                                <MudText Typo="Typo.h6" Style="font-weight: bold;">
+                                    Weather Details for @selectedCityName
+                                </MudText>
+
+                                <MudText Typo="Typo.body1">
+                                    Temperature: @selectedCityWeather.Main.Temp - " °C"
+                                </MudText>
+                                <MudText Typo="Typo.body1">
+                                    Weather: @selectedCityWeather.Weather[0].Description
+                                </MudText>
+                                <MudText Typo="Typo.body1">
+                                    Wind Speed: @selectedCityWeather.Wind.Speed - " m/s"
+                                </MudText>
+                                <MudText Typo="Typo.body1">
+                                    Cloud Coverage: @selectedCityWeather.Clouds.All - " %"
+                                </MudText>
+                            </MudCardContent>
+                        </MudCard>
+                    }
+
+                }
+                else
+                {
+                    <MudText Typo="Typo.body1" Style="color: #999;">
+                        No favourite cities found.
+                    </MudText>
+                }
+            </MudCardContent>
+        </MudCard>
+    }
+</MudContainer>
+
+@code {
+    private bool isLoggedIn = false;
+    private string userId = "";
+    private string userEmail = "";
+    private DataFormats.LocationDetails? location;
+    public bool isLoading = false;
+    public string errorMessage = "";
+    private List<DataFormats.ApiResponses.City> favouriteCities { get; set; } = new List<DataFormats.ApiResponses.City>();
+    private List<DataFormats.WeatherResponseCurrent> favouriteCitiesWeatherDetails = new List<DataFormats.WeatherResponseCurrent>();
+    private Timer timer;
+    private string currentTime = DateTime.Now.ToString("HH:mm:ss");
+    private DataFormats.WeatherResponseCurrent? selectedCityWeather;
+    private string selectedCityName { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        DataFormats.ApiResponses.SessionResponse? res = await LoginService.IsLoggedInAsync();
+        if (res != null)
+        {
+            isLoggedIn = true;
+            userEmail = res.User.Email;
+            userId = res.User.Id;
+            StateHasChanged();
+        }
+        else
+        {
+            isLoggedIn = false;
+            StateHasChanged();
+        }
+
+        if (isLoggedIn)
+        {
+            await FetchCurrentLocationWeather();
+            await FetchFavouriteCities();
+        }
+        else
+        {
+            Snackbar.Add("Please Login", Severity.Warning);
+            Navigation.NavigateTo("/login");
+        }
+        isLoading = false;
+        timer = new Timer(UpdateTime, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(100));
+    }
+
+    private void UpdateTime(object? state)
+    {
+        currentTime = DateTime.Now.ToString("HH:mm:ss");
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async Task FetchCurrentLocationWeather()
+    {
+        errorMessage = "";
+        location = null;
+        isLoading = true;
+        try
+        {
+            location = await LocationService.GetCurrentLocationAsync();
+            if (location == null)
+            {
+                errorMessage = "Failed to fetch location data.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task FetchFavouriteCities()
+    {
+        try
+        {
+            isLoading = true;
+            if (string.IsNullOrEmpty(userId))
+            {
+                return;
+            }
+            var response = await FavoriteService.FetchFavoriteCities(userId);
+            favouriteCities = response?.FavCities ?? new List<DataFormats.ApiResponses.City>();
+            favouriteCitiesWeatherDetails.Clear();
+
+            foreach (var city in favouriteCities)
+            {
+                var weatherResponse = await new Services.WeatherService(Http, configuration).GetCurrentWeatherInfo(city.Coord.Lat, city.Coord.Lon);
+                if (weatherResponse != null)
+                {
+                    favouriteCitiesWeatherDetails.Add(weatherResponse);
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to fetch weather for {city.Name}");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error: " + e.Message);
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+
+    private void ShowWeatherDetails(DataFormats.WeatherResponseCurrent cityWeather, int index)
+    {
+        selectedCityWeather = cityWeather;
+        selectedCityName = favouriteCities[index].Name;
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        timer?.Dispose();
+    }
+}

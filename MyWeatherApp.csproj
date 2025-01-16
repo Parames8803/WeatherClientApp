@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Components\Loader.cs" />
+    <Compile Remove="FetchWeather.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Components\Loader.razor.razor" />
+  </ItemGroup>
+	
+
+	<ItemGroup>
+	  
+	  <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" /> 
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.11" PrivateAssets="all" />
+    <PackageReference Include="MudBlazor" Version="7.15.0" />
+    <PackageReference Include="Supabase" Version="1.1.1" />
+  </ItemGroup>
+
+</Project>

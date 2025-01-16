@@ -1,0 +1,28 @@
+﻿@inject Services.LoginService LoginService
+
+<MudNavMenu>
+    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home" IconColor="Color.Surface" Ripple>Home</MudNavLink>
+    <MudNavLink Href="/forcast" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Cloud" IconColor="Color.Surface" Ripple>Weather Forcast</MudNavLink>
+    @if(isLoggedIn){
+        <MudNavLink Href="/favourites" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Favorite" IconColor="Color.Surface" Ripple>Favourites</MudNavLink>
+        <MudNavLink Href="/profile" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Person" IconColor="Color.Surface" Ripple>Profile</MudNavLink>
+    }
+</MudNavMenu>
+
+@code{
+    private bool isLoggedIn = false;
+    protected override async Task OnInitializedAsync()
+    {
+        DataFormats.ApiResponses.SessionResponse? res = await LoginService.IsLoggedInAsync();
+        if (res != null)
+        {
+            isLoggedIn = true;
+            StateHasChanged();
+        }
+        else
+        {
+            isLoggedIn = false;
+            StateHasChanged();
+        }
+    }
+}

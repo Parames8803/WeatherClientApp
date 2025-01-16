@@ -1,0 +1,50 @@
+﻿@page "/register"
+@inject HttpClient http
+@inject NavigationManager Navigation
+@using Blazored.LocalStorage
+@inject ILocalStorageService LocalStorage
+@inject Services.LoginService LoginService
+@inject ISnackbar Snackbar
+@layout AuthLayout
+
+<PageTitle>Register | CloudCasts</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraSmall" Class="login-container" Style="margin-top: 50px; text-align: center; background-color: #f4f6f8; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h3>Register Page</h3>
+    <MudTextField @bind-Value="Email" Label="Email" Variant="Variant.Filled" />
+    <MudTextField @bind-Value="Password" Label="Password" Variant="Variant.Filled" InputType="InputType.Password" />
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-3" OnClick="@handleRegister">Register</MudButton>
+</MudContainer>
+<p style="text-align:center; margin-top:20px;">Already have an Account ? <a href="/login">Login</a></p>
+<div style="text-align:center;"><MudButton Variant="Variant.Filled" Color="Color.Secondary" Class="mt-3" OnClick="@RouteToHome" Style="margin-top:20px;">Back Home</MudButton></div>
+
+@code {
+    private string Email { get; set; } = "parameswaran080803@gmail.com";
+    private string Password { get; set; } = "prem8803@@";
+
+    private void RouteToHome(){
+        Navigation.NavigateTo("/");
+    }
+
+    private async Task handleRegister()
+    {
+        try
+        {
+            var response = await LoginService.Register(Email, Password);
+            if (response)
+            {
+                Snackbar.Add("Confirmation Email has been sent to the Registered Email.", Severity.Success);
+                Snackbar.Add("Login Once Email is Verified.", Severity.Success);
+                Navigation.NavigateTo("/login");
+            }
+            else
+            {
+                Snackbar.Add("Please Verify your Email.", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error during Register: {ex.Message}", Severity.Error);
+        }
+    }
+}

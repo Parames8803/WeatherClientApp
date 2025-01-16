@@ -1,0 +1,41 @@
+﻿@page "/login"
+@inject HttpClient http
+@inject NavigationManager Navigation
+@using Blazored.LocalStorage
+@inject ILocalStorageService LocalStorage
+@inject Services.LoginService LoginService
+@layout AuthLayout
+@inject ISnackbar Snackbar
+
+<PageTitle>Login | CloudCasts</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraSmall" Class="login-container" Style="margin-top: 50px; text-align: center; background-color: #f4f6f8; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h3>Login Page</h3>
+    <MudTextField @bind-Value="Email" Label="Email" Variant="Variant.Filled" />
+    <MudTextField @bind-Value="Password" Label="Password" Variant="Variant.Filled" InputType="InputType.Password"/>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-3" OnClick="@handleLogin">Login</MudButton>
+</MudContainer>
+
+<p style="text-align:center; margin-top:20px;">Don't have an Account ? <a href="/register">Register</a></p>
+<div style="text-align:center;"><MudButton Variant="Variant.Filled" Color="Color.Secondary" Class="mt-3" OnClick="@RouteToHome" Style="margin-top:20px;">Back Home</MudButton></div>
+
+@code {
+    private string Email { get; set; } = "parameswaran8803@gmail.com";
+    private string Password { get; set; } = "prem8803##";
+
+    private void RouteToHome()
+    {
+        Navigation.NavigateTo("/");
+    }
+
+    private async Task handleLogin()
+    {
+        var result = await LoginService.Login(Email, Password);
+        if(result != null){
+            Snackbar.Add("Login Success", Severity.Success);
+            Navigation.NavigateTo("/");
+        }else{
+            Snackbar.Add("Invalid Credentials.", Severity.Error);
+        }
+    }
+}
