@@ -166,8 +166,7 @@
     public string errorMessage = "";
     private List<DataFormats.ApiResponses.City> favouriteCities { get; set; } = new List<DataFormats.ApiResponses.City>();
     private List<DataFormats.WeatherResponseCurrent> favouriteCitiesWeatherDetails = new List<DataFormats.WeatherResponseCurrent>();
-    private Timer timer;
-    private string currentTime = DateTime.Now.ToString("HH:mm:ss");
+    private Timer? timer;    private string currentTime = DateTime.Now.ToString("HH:mm:ss");
     private DataFormats.WeatherResponseCurrent? selectedCityWeather;
     private string selectedCityName { get; set; } = "";
 

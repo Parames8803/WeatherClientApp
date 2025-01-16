@@ -151,7 +151,7 @@
 
     private async Task OnCountryChange(ChangeEventArgs e)
     {
-        var selectedCountry = e.Value.ToString();
+        var selectedCountry = e.Value?.ToString();
         if (!string.IsNullOrEmpty(selectedCountry))
         {
             cities = await LocationService.GetAllCountries(selectedCountry);
@@ -171,6 +171,11 @@
             isLoading = true;
             StateHasChanged();
             weatherRes = await WeatherService.GetWeatherAsync(cityValue);
+            if (weatherRes?.City == null)
+            {
+                Snackbar.Add("Failed to retrieve weather information for the city.", Severity.Error);
+                return;
+            }
             var res = await FavoriteService.SaveCity(userId, weatherRes.City);
             if (res != null)
             {
@@ -217,7 +222,7 @@
                 return;
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Snackbar.Add("No Data Found.", Severity.Error);
         }
@@ -268,8 +273,8 @@
         await Task.Delay(500, token);
 
         if (string.IsNullOrEmpty(value))
-            return cities;
+            return cities ?? Enumerable.Empty<string>();
 
-        return cities.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+        return cities?.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase)) ?? Enumerable.Empty<string>();
     }
 }

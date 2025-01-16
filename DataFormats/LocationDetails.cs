@@ -47,25 +47,25 @@
 
         public class CityApiResponse
         {
-            public bool Error { get; set; }
-            public string Msg { get; set; }
-            public List<string> Data { get; set; }
+            public bool? Error { get; set; }
+            public string? Msg { get; set; }
+            public List<string>? Data { get; set; }
         }
 
         public class CountryApiResponse
         {
-            public bool Error { get; set; }
-            public string Msg { get; set; }
-            public List<CountryDetails> Data { get; set; }
+            public bool? Error { get; set; }
+            public string? Msg { get; set; }
+            public List<CountryDetails>? Data { get; set; }
         }
 
         public class CountryDetails
         {
-            public string Name { get; set; }
-            public string Currency { get; set; }
-            public string UnicodeFlag { get; set; }
-            public string Flag { get; set; }
-            public string Dialcode { get; set; }
+            public string? Name { get; set; }
+            public string? Currency { get; set; }
+            public string? UnicodeFlag { get; set; }
+            public string? Flag { get; set; }
+            public string? Dialcode { get; set; }
         }
 
     }

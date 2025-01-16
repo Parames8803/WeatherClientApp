@@ -106,8 +106,7 @@
     public bool WeatherDataAvailable => WeatherData != null;
 
     public List<ChartSeries> TemperatureSeries { get; set; } = new();
-    public double[] WindSpeedSeries { get; set; }
-    public List<ChartSeries> HumiditySeries { get; set; } = new();
+    public double[] WindSpeedSeries { get; set; } = Array.Empty<double>();    public List<ChartSeries> HumiditySeries { get; set; } = new();
     public string[] XAxisLabels { get; set; } = Array.Empty<string>();
     public ChartOptions Options = new ChartOptions();
 
