@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hqQAawDNv2ps/oRXl/a00keqO4wa5pmYntILFvsrW14=",
+  "Hash": "MY7iVOtv+r+DdZ3kmznmmOieEnffRJrwU4kIE1Z3WaQ=",
   "Source": "MyWeatherApp",
   "BasePath": "/",
   "Mode": "Root",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "3ufa2qgur5",
-      "Integrity": "q9iKfc3iT6dZkJc8Bou1NDek5TVqsHWAryA28cXaSRM=",
+      "Fingerprint": "5r47rncx37",
+      "Integrity": "LzUIfNvX+b64b3gcrbla/Q7GlbBnRgXYU1ZT0XyUvyM=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net8.0\\blazor.boot.json"
@@ -1123,8 +1123,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "wdqrdhbdq0",
-      "Integrity": "rEDhktvlDh6OmwSMJN8phua5dIZFpq9JQ4PY56JryCY=",
+      "Fingerprint": "b4nytq1dus",
+      "Integrity": "i96Kv6hjXhAnS+oryL2qE3zCmlAC0x+uoO2KRacdh0w=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net8.0\\MyWeatherApp.pdb"
@@ -1144,8 +1144,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "i0vyjvpa8n",
-      "Integrity": "grB0NMMjmmxvAs6hS8GtBtvAjfG8Fvy5iGoDHOYZWpc=",
+      "Fingerprint": "8b95jmupwa",
+      "Integrity": "ZOkELguUtDFZf+QJLAGw/ByZ4a9WuH+EvjRGeUsdSyQ=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\webcil\\MyWeatherApp.wasm"
@@ -5939,7 +5939,7 @@
       "OriginalItemSpec": "F:\\blazor\\repos\\MyWeatherApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.Extensions.Configuration.FileExtensions.wasm"
     },
     {
-      "Identity": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\9kbgntszgx-i0vyjvpa8n.gz",
+      "Identity": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\9kbgntszgx-8b95jmupwa.gz",
       "SourceId": "MyWeatherApp",
       "SourceType": "Computed",
       "ContentRoot": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -5953,8 +5953,8 @@
       "RelatedAsset": "F:\\blazor\\repos\\MyWeatherApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\MyWeatherApp.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "u587hh840d",
-      "Integrity": "7sUclH2R6/ut1RMnBE/bKcTi7ZKmFlpJJnX/KqJdmZE=",
+      "Fingerprint": "xje9m85bho",
+      "Integrity": "E0jno3BcLjGcEX0ZehPTkh1WfosoVHDQXkPJ955yYM0=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\blazor\\repos\\MyWeatherApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\MyWeatherApp.wasm"
@@ -6611,7 +6611,7 @@
       "OriginalItemSpec": "F:\\blazor\\repos\\MyWeatherApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.ComponentModel.Primitives.wasm"
     },
     {
-      "Identity": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\gp3hs1o7o9-3ufa2qgur5.gz",
+      "Identity": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\gp3hs1o7o9-5r47rncx37.gz",
       "SourceId": "MyWeatherApp",
       "SourceType": "Computed",
       "ContentRoot": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -6625,8 +6625,8 @@
       "RelatedAsset": "F:\\blazor\\repos\\MyWeatherApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "eb4ot7hxuk",
-      "Integrity": "2jTnbBPV4XIl19mfjF+ACHFfERhgImsnmYcD0v9nZE0=",
+      "Fingerprint": "px6egddwcu",
+      "Integrity": "nU4uenD834Y1VV0SDDEmA0kgbeFCS6smp+JgIDSvPyg=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\blazor\\repos\\MyWeatherApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json"
@@ -6989,7 +6989,7 @@
       "OriginalItemSpec": "F:\\blazor\\repos\\MyWeatherApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Xml.XPath.wasm"
     },
     {
-      "Identity": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\j1et3t0igu-wdqrdhbdq0.gz",
+      "Identity": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\j1et3t0igu-b4nytq1dus.gz",
       "SourceId": "MyWeatherApp",
       "SourceType": "Computed",
       "ContentRoot": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\",
@@ -7003,8 +7003,8 @@
       "RelatedAsset": "F:\\blazor\\repos\\MyWeatherApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\MyWeatherApp.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "xkvbgbttzj",
-      "Integrity": "oaAIsaCzj9Jr1Lf324D9xqw/d3hck6+AwweHsMKacsY=",
+      "Fingerprint": "0iqwp4ceid",
+      "Integrity": "KNekHeb4PVRscFWNcs26CZ8Csv0mKF1fLAKfN3MyiNo=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "F:\\blazor\\repos\\MyWeatherApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\MyWeatherApp.pdb"
@@ -9876,11 +9876,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"q9iKfc3iT6dZkJc8Bou1NDek5TVqsHWAryA28cXaSRM=\""
+          "Value": "\"LzUIfNvX+b64b3gcrbla/Q7GlbBnRgXYU1ZT0XyUvyM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Jan 2025 10:22:03 GMT"
+          "Value": "Thu, 16 Jan 2025 11:31:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9890,18 +9890,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-q9iKfc3iT6dZkJc8Bou1NDek5TVqsHWAryA28cXaSRM="
+          "Value": "sha256-LzUIfNvX+b64b3gcrbla/Q7GlbBnRgXYU1ZT0XyUvyM="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json",
-      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\gp3hs1o7o9-3ufa2qgur5.gz",
+      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\gp3hs1o7o9-5r47rncx37.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000103993344"
+          "Quality": "0.000104004160"
         }
       ],
       "ResponseHeaders": [
@@ -9911,15 +9911,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9615"
+          "Value": "9614"
         },
         {
           "Name": "ETag",
-          "Value": "\"2jTnbBPV4XIl19mfjF+ACHFfERhgImsnmYcD0v9nZE0=\""
+          "Value": "\"nU4uenD834Y1VV0SDDEmA0kgbeFCS6smp+JgIDSvPyg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Jan 2025 08:49:52 GMT"
+          "Value": "Thu, 16 Jan 2025 11:14:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9939,19 +9939,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"q9iKfc3iT6dZkJc8Bou1NDek5TVqsHWAryA28cXaSRM=\""
+          "Value": "W/\"LzUIfNvX+b64b3gcrbla/Q7GlbBnRgXYU1ZT0XyUvyM=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-q9iKfc3iT6dZkJc8Bou1NDek5TVqsHWAryA28cXaSRM="
+          "Value": "sha256-LzUIfNvX+b64b3gcrbla/Q7GlbBnRgXYU1ZT0XyUvyM="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\gp3hs1o7o9-3ufa2qgur5.gz",
+      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\gp3hs1o7o9-5r47rncx37.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -9960,7 +9960,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9615"
+          "Value": "9614"
         },
         {
           "Name": "Content-Type",
@@ -9968,11 +9968,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"2jTnbBPV4XIl19mfjF+ACHFfERhgImsnmYcD0v9nZE0=\""
+          "Value": "\"nU4uenD834Y1VV0SDDEmA0kgbeFCS6smp+JgIDSvPyg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Jan 2025 08:49:52 GMT"
+          "Value": "Thu, 16 Jan 2025 11:14:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9990,7 +9990,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-2jTnbBPV4XIl19mfjF+ACHFfERhgImsnmYcD0v9nZE0="
+          "Value": "sha256-nU4uenD834Y1VV0SDDEmA0kgbeFCS6smp+JgIDSvPyg="
         }
       ]
     },
@@ -16718,7 +16718,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "78700"
+          "Value": "78760"
         },
         {
           "Name": "Content-Type",
@@ -16726,11 +16726,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rEDhktvlDh6OmwSMJN8phua5dIZFpq9JQ4PY56JryCY=\""
+          "Value": "\"i96Kv6hjXhAnS+oryL2qE3zCmlAC0x+uoO2KRacdh0w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Jan 2025 10:22:01 GMT"
+          "Value": "Thu, 16 Jan 2025 11:31:36 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -16740,18 +16740,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-rEDhktvlDh6OmwSMJN8phua5dIZFpq9JQ4PY56JryCY="
+          "Value": "sha256-i96Kv6hjXhAnS+oryL2qE3zCmlAC0x+uoO2KRacdh0w="
         }
       ]
     },
     {
       "Route": "_framework/MyWeatherApp.pdb",
-      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\j1et3t0igu-wdqrdhbdq0.gz",
+      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\j1et3t0igu-b4nytq1dus.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000017581799"
+          "Quality": "0.000017604084"
         }
       ],
       "ResponseHeaders": [
@@ -16761,15 +16761,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "56876"
+          "Value": "56804"
         },
         {
           "Name": "ETag",
-          "Value": "\"oaAIsaCzj9Jr1Lf324D9xqw/d3hck6+AwweHsMKacsY=\""
+          "Value": "\"KNekHeb4PVRscFWNcs26CZ8Csv0mKF1fLAKfN3MyiNo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Jan 2025 08:49:11 GMT"
+          "Value": "Thu, 16 Jan 2025 11:14:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -16789,19 +16789,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"rEDhktvlDh6OmwSMJN8phua5dIZFpq9JQ4PY56JryCY=\""
+          "Value": "W/\"i96Kv6hjXhAnS+oryL2qE3zCmlAC0x+uoO2KRacdh0w=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-rEDhktvlDh6OmwSMJN8phua5dIZFpq9JQ4PY56JryCY="
+          "Value": "sha256-i96Kv6hjXhAnS+oryL2qE3zCmlAC0x+uoO2KRacdh0w="
         }
       ]
     },
     {
       "Route": "_framework/MyWeatherApp.pdb.gz",
-      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\j1et3t0igu-wdqrdhbdq0.gz",
+      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\j1et3t0igu-b4nytq1dus.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -16810,7 +16810,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "56876"
+          "Value": "56804"
         },
         {
           "Name": "Content-Type",
@@ -16818,11 +16818,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"oaAIsaCzj9Jr1Lf324D9xqw/d3hck6+AwweHsMKacsY=\""
+          "Value": "\"KNekHeb4PVRscFWNcs26CZ8Csv0mKF1fLAKfN3MyiNo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Jan 2025 08:49:11 GMT"
+          "Value": "Thu, 16 Jan 2025 11:14:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -16840,7 +16840,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-oaAIsaCzj9Jr1Lf324D9xqw/d3hck6+AwweHsMKacsY="
+          "Value": "sha256-KNekHeb4PVRscFWNcs26CZ8Csv0mKF1fLAKfN3MyiNo="
         }
       ]
     },
@@ -16863,11 +16863,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"grB0NMMjmmxvAs6hS8GtBtvAjfG8Fvy5iGoDHOYZWpc=\""
+          "Value": "\"ZOkELguUtDFZf+QJLAGw/ByZ4a9WuH+EvjRGeUsdSyQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Jan 2025 10:22:02 GMT"
+          "Value": "Thu, 16 Jan 2025 11:31:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -16877,18 +16877,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-grB0NMMjmmxvAs6hS8GtBtvAjfG8Fvy5iGoDHOYZWpc="
+          "Value": "sha256-ZOkELguUtDFZf+QJLAGw/ByZ4a9WuH+EvjRGeUsdSyQ="
         }
       ]
     },
     {
       "Route": "_framework/MyWeatherApp.wasm",
-      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\9kbgntszgx-i0vyjvpa8n.gz",
+      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\9kbgntszgx-8b95jmupwa.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000019237428"
+          "Quality": "0.000019325539"
         }
       ],
       "ResponseHeaders": [
@@ -16898,15 +16898,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "51981"
+          "Value": "51744"
         },
         {
           "Name": "ETag",
-          "Value": "\"7sUclH2R6/ut1RMnBE/bKcTi7ZKmFlpJJnX/KqJdmZE=\""
+          "Value": "\"E0jno3BcLjGcEX0ZehPTkh1WfosoVHDQXkPJ955yYM0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Jan 2025 08:49:12 GMT"
+          "Value": "Thu, 16 Jan 2025 11:14:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -16926,19 +16926,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"grB0NMMjmmxvAs6hS8GtBtvAjfG8Fvy5iGoDHOYZWpc=\""
+          "Value": "W/\"ZOkELguUtDFZf+QJLAGw/ByZ4a9WuH+EvjRGeUsdSyQ=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-grB0NMMjmmxvAs6hS8GtBtvAjfG8Fvy5iGoDHOYZWpc="
+          "Value": "sha256-ZOkELguUtDFZf+QJLAGw/ByZ4a9WuH+EvjRGeUsdSyQ="
         }
       ]
     },
     {
       "Route": "_framework/MyWeatherApp.wasm.gz",
-      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\9kbgntszgx-i0vyjvpa8n.gz",
+      "AssetFile": "F:\\blazor\\repos\\MyWeatherApp\\obj\\Debug\\net8.0\\compressed\\9kbgntszgx-8b95jmupwa.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -16947,7 +16947,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "51981"
+          "Value": "51744"
         },
         {
           "Name": "Content-Type",
@@ -16955,11 +16955,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"7sUclH2R6/ut1RMnBE/bKcTi7ZKmFlpJJnX/KqJdmZE=\""
+          "Value": "\"E0jno3BcLjGcEX0ZehPTkh1WfosoVHDQXkPJ955yYM0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Jan 2025 08:49:12 GMT"
+          "Value": "Thu, 16 Jan 2025 11:14:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -16977,7 +16977,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-7sUclH2R6/ut1RMnBE/bKcTi7ZKmFlpJJnX/KqJdmZE="
+          "Value": "sha256-E0jno3BcLjGcEX0ZehPTkh1WfosoVHDQXkPJ955yYM0="
         }
       ]
     },

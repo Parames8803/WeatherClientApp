@@ -1,14 +1,11 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY ["MyWeatherApp.csproj", "."]
-RUN dotnet restore "MyWeatherApp.csproj"
-COPY . .
-RUN dotnet build "MyWeatherApp.csproj" -c Release -o /app/build
-RUN dotnet publish "MyWeatherApp.csproj" -c Release -o /app/publish
+# Use a lightweight web server image (Nginx) to serve the Blazor WebAssembly files
+FROM nginx:alpine
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
-WORKDIR /app
-COPY --from=build /app/publish .
+# Copy the published files to the Nginx directory
+COPY ./publish/wwwroot /usr/share/nginx/html
+
+# Expose port 80 to access the application
 EXPOSE 80
-EXPOSE 443
-ENTRYPOINT ["dotnet", "MyWeatherApp.dll"]
+
+# Use Nginx to serve the Blazor WebAssembly app
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MyWeatherApp",
   "resources": {
-    "hash": "sha256-A86XkYjkjdc2l1NHhbkrtwtUTZCfPSyxvxM+on4jv7s=",
+    "hash": "sha256-iu+a3YMEltbsG4Zr24cMxTVua2JAJtjOG2ETUn7X9k8=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-VdKq87/z5NIxZKmuM+fv38XF+RcEb/bg3jVBwQSfwP4="
     },
@@ -48,7 +48,7 @@
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-Jwrlf0VPydOWncfsAvk569TQrosh6ro1Xkc8HzvG2nQ=",
       "MimeMapping.wasm": "sha256-CMXcRIg84k7AstbhcD8rbnPKy2wa/gmsBD8gBgZP1c8=",
       "MudBlazor.wasm": "sha256-Bbfg/5Tn4kp8FgZj7Kaq2V4XQlikZxaBqErEnBFkjNw=",
-      "MyWeatherApp.wasm": "sha256-AuA+7CdKB4bUz8dNR4O4Md6J4H8zbPbEOD59FqWkvxw=",
+      "MyWeatherApp.wasm": "sha256-VhPlLi1WFSUcLeXk5/4mwW6VLFdBsa0grkLagh98Fwg=",
       "netstandard.wasm": "sha256-5w/fqtSeEGpPATkiCmBWsPh6/4QTBvaaIYau7uJbNwk=",
       "Newtonsoft.Json.wasm": "sha256-GlXMWKvDs45M2pACoR3Y4Qh8mcrOZGljqmvJY+6JZ5s=",
       "Supabase.Core.wasm": "sha256-jUEh1mM6mkGdyQrEwowAbpQ8R148PZIAUIOXn0mrgIA=",

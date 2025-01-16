@@ -1142,6 +1142,6 @@ F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\lzl4ourh0u-12n6dz54qr.g
 F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\scopedcss\Components\Loader.razor.rz.scp.css
 F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\scopedcss\Pages\Favourites.razor.rz.scp.css
 F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\scopedcss\Pages\Profile.razor.rz.scp.css
-F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\9kbgntszgx-i0vyjvpa8n.gz
-F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\j1et3t0igu-wdqrdhbdq0.gz
-F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\gp3hs1o7o9-3ufa2qgur5.gz
+F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\9kbgntszgx-8b95jmupwa.gz
+F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\j1et3t0igu-b4nytq1dus.gz
+F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\gp3hs1o7o9-5r47rncx37.gz

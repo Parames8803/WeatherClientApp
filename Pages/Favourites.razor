@@ -239,12 +239,6 @@
         {
             isRemoving[city] = true;
             StateHasChanged();
-            var userId = await LocalStorage.GetItemAsync<string>("userId");
-            if (string.IsNullOrEmpty(userId))
-            {
-                Snackbar.Add("User not logged in.", Severity.Error);
-                return;
-            }
 
             var response = await FavoriteService.RemoveCity(userId, city);
             if (response != null)

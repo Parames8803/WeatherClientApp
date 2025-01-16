@@ -1128,9 +1128,6 @@ F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\compressed\t79q5c93rp-tjcz0u77k5
 F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\compressed\qzfvfd2cki-tptq2av103.gz
 F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\compressed\qqvrt7p4ji-lfu7j35m59.gz
 F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\compressed\juv82zl85y-oyz0vx2fzb.gz
-F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\compressed\9kbgntszgx-yzbdeluqzm.gz
-F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\compressed\j1et3t0igu-xc8j5lnnb3.gz
-F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\compressed\gp3hs1o7o9-xdv3ffm1fl.gz
 F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\staticwebassets.build.json
 F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\staticwebassets.development.json
 F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\staticwebassets.build.endpoints.json
@@ -1145,3 +1142,6 @@ F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\MyWeatherApp.dll
 F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\refint\MyWeatherApp.dll
 F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\MyWeatherApp.pdb
 F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\ref\MyWeatherApp.dll
+F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\compressed\9kbgntszgx-64o5qsc8qr.gz
+F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\compressed\j1et3t0igu-4o1yvo7zm8.gz
+F:\blazor\repos\MyWeatherApp\obj\Release\net8.0\compressed\gp3hs1o7o9-ajpefrr3pz.gz
