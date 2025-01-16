@@ -1139,10 +1139,9 @@ F:\blazor\repos\MyWeatherApp\bin\Debug\net8.0\wwwroot\_framework\Blazored.LocalS
 F:\blazor\repos\MyWeatherApp\bin\Debug\net8.0\Blazored.LocalStorage.dll
 F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\webcil\Blazored.LocalStorage.wasm
 F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\lzl4ourh0u-12n6dz54qr.gz
-F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\scopedcss\Components\Loader.razor.rz.scp.css
 F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\scopedcss\Pages\Favourites.razor.rz.scp.css
 F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\scopedcss\Pages\Profile.razor.rz.scp.css
-F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\9kbgntszgx-m22j76xlui.gz
-F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\j1et3t0igu-0fvd86ejjb.gz
-F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\gp3hs1o7o9-186jd7b7t4.gz
+F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\9kbgntszgx-i0vyjvpa8n.gz
+F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\j1et3t0igu-wdqrdhbdq0.gz
+F:\blazor\repos\MyWeatherApp\obj\Debug\net8.0\compressed\gp3hs1o7o9-3ufa2qgur5.gz

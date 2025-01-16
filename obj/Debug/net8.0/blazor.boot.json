@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MyWeatherApp",
   "resources": {
-    "hash": "sha256-MzKk7mvZDIOEuV26phSYL8E9rtuu9qwXl4N4BAMnPiI=",
+    "hash": "sha256-0/M4hoVdaCnngpn1jCt2DBj2IqBbAbWJr+dT/Fo0BzQ=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-VdKq87/z5NIxZKmuM+fv38XF+RcEb/bg3jVBwQSfwP4="
     },
@@ -230,10 +230,10 @@
       "mscorlib.wasm": "sha256-04e4k5XU8HWGB/dq/2+j84xzzGPflTs0IYWI0OxogVc=",
       "netstandard.wasm": "sha256-gnGZURPnoSmjXuYNCOJi5tt8qn2LRImWgue1Ru3/TDQ=",
       "System.Private.CoreLib.wasm": "sha256-6w3jYr0arcp8jnt4aeqh+AmqrLA6q7jl9rQYAwLzE0M=",
-      "MyWeatherApp.wasm": "sha256-wt+suCXfV1yT1QG/DBDTt4HpsDNmacOKZ2W9fwkonGo="
+      "MyWeatherApp.wasm": "sha256-grB0NMMjmmxvAs6hS8GtBtvAjfG8Fvy5iGoDHOYZWpc="
     },
     "pdb": {
-      "MyWeatherApp.pdb": "sha256-TGDHfEwDHgJ1jRNomSwJb2jJivMKE5vzDCueBDBZFW0="
+      "MyWeatherApp.pdb": "sha256-rEDhktvlDh6OmwSMJN8phua5dIZFpq9JQ4PY56JryCY="
     }
   },
   "cacheBootResources": true,
