@@ -1,2 +1,0 @@
-F:\blazor\repos\MyWeatherApp\publish\emcc-props.json
-F:\blazor\repos\MyWeatherApp\publish\web.config
