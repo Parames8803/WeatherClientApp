@@ -4,28 +4,30 @@
     using System.Net.Http.Json;
     using System.Threading.Tasks;
     using static System.Net.WebRequestMethods;
+    using Microsoft.Extensions.Configuration;
+    using System.Collections.Generic;
 
     public class LocationService
     {
         private readonly HttpClient _httpClient;
         private const string ApiKey = "31accee574574bb88a7bda13b3aa2d5a";
-        private string AbstractApiUrl;
-        private string CountriesNowApiUrl;
+        private readonly string AbstractApiUrl;
+        private readonly string CountriesNowApiUrl;
 
         public LocationService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            AbstractApiUrl = configuration["AbstractApiUrl"];
-            CountriesNowApiUrl = configuration["CountriesNowApiUrl"];
+            AbstractApiUrl = configuration["AbstractApiUrl"] ?? string.Empty;
+            CountriesNowApiUrl = configuration["CountriesNowApiUrl"] ?? string.Empty;
         }
 
-        public async Task<DataFormats.LocationDetails?> GetCurrentLocationAsync()
+        public async Task<DataFormats.CurrentLocation?> GetCurrentLocationAsync()
         {
             string apiUrl = AbstractApiUrl;
 
             try
             {
-                return await _httpClient.GetFromJsonAsync<DataFormats.LocationDetails>(apiUrl);
+                return await _httpClient.GetFromJsonAsync<DataFormats.CurrentLocation>(apiUrl);
             }
             catch
             {
@@ -39,7 +41,7 @@
             var cityData = await cityResponse.Content.ReadFromJsonAsync<DataFormats.LocationDetails.CityApiResponse>();
             if(cityData != null)
             {
-                return cityData?.Data ?? new List<string>();
+                return cityData.Data ?? new List<string>();
             }
             else
             {
@@ -47,5 +49,4 @@
             }
         }
     }
-
 }
