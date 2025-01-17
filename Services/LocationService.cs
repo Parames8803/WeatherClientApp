@@ -6,6 +6,7 @@
     using static System.Net.WebRequestMethods;
     using Microsoft.Extensions.Configuration;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
 
     public class LocationService
     {
@@ -27,7 +28,10 @@
 
             try
             {
-                return await _httpClient.GetFromJsonAsync<DataFormats.CurrentLocation>(apiUrl);
+                var jsonResponse = await _httpClient.GetStringAsync(apiUrl);
+                var cleanedJson = jsonResponse.Replace("geoip(", "").Replace(")", "");               
+                var location = JsonConvert.DeserializeObject<DataFormats.CurrentLocation>(cleanedJson);              
+                return location;
             }
             catch
             {
