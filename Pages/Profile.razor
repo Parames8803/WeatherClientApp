@@ -15,6 +15,32 @@
 
 <PageTitle>Profile | CloudCasts</PageTitle>
 
+<style>
+    /* Default: 3 items per row */
+    .mud-list-item {
+        flex: 1 1 calc(33% - 15px); /* 3 items per row */
+        margin-bottom: 15px;
+        border: 0.5px solid gray;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    /* On mobile screens, stack items vertically (1 item per row) */
+    @@media (max-width: 767px) {
+        .mud-list-item {
+            flex: 1 1 100%; /* 1 item per row */
+        }
+    }
+
+    /* On tablets or smaller devices, you can adjust to 2 items per row */
+    @@media (max-width: 1024px) {
+        .mud-list-item {
+            flex: 1 1 calc(50% - 15px); /* 2 items per row */
+        }
+    }
+</style>
+
 <MudContainer MaxWidth="MaxWidth.Large" Style="padding: 40px 20px;">
     @if (isLoading)
     {
@@ -24,8 +50,8 @@
     }
     else
     {
-        <MudCard Style="border-radius: 12px; background-color: #fff; padding: 20px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); width: 100%; display: flex; align-items: center;">
-            <MudCardContent Style="display: flex; flex-direction: row; justify-content: flex-start; width: 100%; gap: 30px;">
+        <MudCard Style="border-radius: 12px; background-color: #fff; padding: 10px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); width: 100%; display: flex; align-items: center;">
+            <MudCardContent Style="display: flex; flex-direction: row; justify-content: center; width: 100%; gap: 30px; flex-wrap: wrap;">
                 <div style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(45deg, #ff6b6b, #f06595); color: white; display: flex; justify-content: center; align-items: center; font-size: 2rem; font-weight: bold;">
                     <MudText Typo="Typo.h4" Style="color: white;">
                         @($"{char.ToUpper(userEmail[0])}")
@@ -33,11 +59,11 @@
                 </div>
 
                 <div style="flex: 1;">
-                    <MudText Typo="Typo.h5" Style="color: tomato; text-align: left;">
+                    <MudText Typo="Typo.h6" Style="color: tomato; text-align: left;">
                         <span style="color: black;">Welcome, </span>@($"{userEmail}!")
                     </MudText>
 
-                    <div style="display:flex; align-items:center; justify-content: flex-start; gap:10px;">
+                    <div style="display:flex; align-items:center; justify-content: flex-start; gap:10px; flex-wrap: wrap;">
                         <MudTooltip Text="Location">
                             <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
                                 <MudIcon Icon="@Icons.Material.Filled.LocationOn" Style="color: #f06595;"></MudIcon>
@@ -107,11 +133,7 @@
                     <MudList T="string" Style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
                         @foreach (var cityWeather in favouriteCitiesWeatherDetails.Select((value, index) => new { value, index }))
                         {
-                            <MudListItem @onclick="() => ShowWeatherDetails(cityWeather.value, cityWeather.index)"
-                                         Style="flex: 1 1 calc(33% - 15px); margin-bottom: 15px;
-                            border: 0.5px solid gray; text-align: center;
-                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                            transition: box-shadow 0.3s ease;">
+                            <MudListItem @onclick="() => ShowWeatherDetails(cityWeather.value, cityWeather.index)">
                                 <MudText Typo="Typo.h6" Style="cursor: pointer;">
                                     <h6>@favouriteCities[cityWeather.index].Name</h6>
                                 </MudText>

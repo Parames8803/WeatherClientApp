@@ -4,9 +4,22 @@
 
 <PageTitle>Weather Forecasts | CloudCasts</PageTitle>
 
+<style>
+    .mud-ltr{
+        width:100%;
+        height:300px;
+    }
+    .mud-tabs-tabbar-content{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
 <MudContainer MaxWidth="MaxWidth.Large" Class="profile-container" Style="margin-top: 20px; background-color: #f4f6f8; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-    <div style="display:flex; align-items:center;">
-        <MudTextField @bind-Value="City" Label="City Name" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.LocationCity" Style="width:400px; height:50px; background-color:white;"></MudTextField>
+    <div style="display:flex; align-items:center; justify-content: space-between; gap: 10px;">
+        <MudTextField @bind-Value="City" Label="City Name" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.LocationCity" Style="width:100%; height:50px; background-color:white;"></MudTextField>
         <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="FetchWeather">Get Forcasts</MudButton>
     </div>
 
@@ -22,7 +35,7 @@
                 var city = WeatherData.City.Name;
                 var todayForecast = WeatherData.List.First();
                 <h4><MudIcon Icon="mdi-weather-partly-cloudy" Size="Size.Large" />Weather in @city</h4>
-                <div class="d-flex justify-content-center gap-4">
+                <div class="d-flex justify-content-center gap-4" style="flex-wrap: wrap; margin-top: 10px;">
                     <div>
                         <h5>Temperature</h5>
                         <p>@Math.Round(todayForecast.Main.Temp - 273.15) °C / @Math.Round(((todayForecast.Main.Temp - 273.15) * 9 / 5 + 32)) °F</p>
@@ -52,16 +65,16 @@
             {
                 var todayForecasts = WeatherData.List.Where(f => f.Dt_txt.StartsWith(DateTime.Now.ToString("yyyy-MM-dd"))).ToList();
                 <div style="display:flex; justify-content:center; align-items:center; width:100%;">
-                    <MudCardContent style="display:flex; justify-content:center; align-items:center; width:fit-content;">
-                        <MudTabs>
+                    <MudCardContent style="display:flex; justify-content:center; align-items:center; width:100%;">
+                        <MudTabs style="width: 100%; text-align: center;">
                             <MudTabPanel Text="Temperature">
-                                <MudChart ChartType="ChartType.Line" ChartSeries="@TemperatureSeries" XAxisLabels="@XAxisLabels" Width="100%" Height="300px" ChartOptions="@Options" />
+                                <MudChart ChartType="ChartType.Line" ChartSeries="@TemperatureSeries" XAxisLabels="@XAxisLabels" ChartOptions="@Options" />
                             </MudTabPanel>
                             <MudTabPanel Text="Humidity">
-                                <MudChart ChartType="ChartType.Line" ChartSeries="@HumiditySeries" XAxisLabels="@XAxisLabels" Width="100%" Height="300px" ChartOptions="@Options" />
+                                <MudChart ChartType="ChartType.Line" ChartSeries="@HumiditySeries" XAxisLabels="@XAxisLabels" ChartOptions="@Options" />
                             </MudTabPanel>
                             <MudTabPanel Text="Wind Speed">
-                                <MudChart ChartType="ChartType.Pie" InputData="@WindSpeedSeries" InputLabels="@XAxisLabels" Width="100%" Height="300px" ChartOptions="@Options" />
+                                <MudChart ChartType="ChartType.Pie" InputData="@WindSpeedSeries" InputLabels="@XAxisLabels" ChartOptions="@Options" />
                             </MudTabPanel>
                         </MudTabs>
                     </MudCardContent>
@@ -101,7 +114,6 @@
     {
         <p style="color:red;">Error: @ErrorMessage</p>
     }
-
 </MudContainer>
 
 
